@@ -1,3 +1,5 @@
+CTRL + SHIFT + V
+
 # 📖 Material de Estudio — Clase 02: Primeros Pasos con React Native y Expo
 
 **Para qué sirve este documento:** acá están todos los conceptos vistos en la Clase 02, explicados en limpio y en orden, para repasar antes del parcial, antes de la próxima clase, o cuando algo no quedó claro en vivo. No hace falta leerlo de corrido — usá el índice para ir directo a lo que necesitás repasar.
