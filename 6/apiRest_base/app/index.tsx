@@ -1,8 +1,7 @@
 import { UserCard } from "@/components/UserCard";
-import UseRefExample from "@/components/UseRefExample";
 import { useGetUsers } from "@/hooks/useGetUsers";
-import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import { useFocusEffect, useRouter } from "expo-router";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Button,
@@ -21,22 +20,32 @@ export default function Index() {
   const { error, getUsers, loading, users } = useGetUsers();
   const [search, setSearch] = useState("");
 
+  // Se ejecuta cada vez que esta pantalla gana foco: al abrirla y también
+  // al volver desde create-user (a diferencia de useEffect, que solo corre una vez).
+  useFocusEffect(
+    useCallback(() => {
+      getUsers();
+    }, [getUsers])
+  );
 
-  // Sin useMemo: esta función se vuelve a ejecutar en CADA render,
-  // aunque "users" y "search" sigan siendo los mismos.
-  const getFilteredUsers = () => {
+  // useRef: memoria silenciosa. Cambiarla NO dispara un re-render.
+  const renderCount = useRef(0);
+  renderCount.current++;
+
+  // useMemo: recalcula el filtro solo si cambian "users" o "search".
+  const filteredUsers = useMemo(() => {
     if (!search.trim()) return users;
     return users.filter(
       (user) =>
         user.name.toLowerCase().includes(search.toLowerCase()) ||
         user.email.toLowerCase().includes(search.toLowerCase())
     );
-  };
+  }, [users, search]);
 
-  // Todavía sin useCallback: se recrea en cada render de Index.
-  const handleGoToCreate = () => {
+  // useCallback: identidad estable para el botón de navegación.
+  const handleGoToCreate = useCallback(() => {
     router.push("/create-user");
-  };
+  }, [router]);
 
   if (error) {
     return (
@@ -50,13 +59,15 @@ export default function Index() {
   return (
     <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
       <View style={styles.header}>
-        <Text style={styles.title}>Lista de usuarios</Text>
+        <View>
+          <Text style={styles.title}>Lista de usuarios</Text>
+          <Text style={styles.renderText}>Renders: {renderCount.current}</Text>
+        </View>
         <TouchableOpacity style={styles.addButton} onPress={handleGoToCreate}>
           <Text style={styles.addButtonText}>+ Nuevo Usuario</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Input de búsqueda para demostrar useMemo más adelante */}
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
@@ -66,15 +77,13 @@ export default function Index() {
         />
       </View>
 
-      <UseRefExample />
-
       {loading && users.length === 0 ? (
         <View style={styles.centered}>
           <ActivityIndicator size="large" color="#5d5da3" />
         </View>
       ) : (
         <FlatList
-          data={getFilteredUsers()}
+          data={filteredUsers}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => <UserCard user={item} />}
           refreshing={loading}
@@ -102,6 +111,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: { fontSize: 22, fontWeight: "bold" },
+  renderText: { fontSize: 12, color: "#666", fontStyle: "italic" },
   addButton: { backgroundColor: "#007bff", paddingHorizontal: 12, paddingVertical: 8, borderRadius: 6 },
   addButtonText: { color: "#fff", fontWeight: "600" },
   searchContainer: { padding: 10, backgroundColor: "#fff", borderBottomWidth: 1, borderBottomColor: "#eee" },

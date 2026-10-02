@@ -1,0 +1,42 @@
+# Red de seguridad para todo el repo (cada app ya tiene el suyo, esto cubre lo que falte)
+
+# dependencias
+node_modules/
+
+# Expo / Metro
+.expo/
+.expo-shared/
+dist/
+web-build/
+expo-env.d.ts
+.metro-health-check*
+
+# builds nativos locales
+android/
+ios/
+.kotlin/
+*.apk
+*.aab
+*.ipa
+*.jks
+*.p8
+*.p12
+*.key
+*.pem
+*.mobileprovision
+
+# variables de entorno locales
+.env
+.env*.local
+
+# TypeScript / logs / debug
+*.tsbuildinfo
+*.log
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.idea/

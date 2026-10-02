@@ -87,6 +87,36 @@
       "email": "jlopez@gmail.biz",
       "phone": "024-648-3804",
       "website": "ambrose.net"
+    },
+    {
+      "name": "pedro pedro",
+      "username": "pedraza",
+      "email": "pedro@email.com",
+      "id": 12
+    },
+    {
+      "name": "Mario",
+      "username": "mario",
+      "email": "mario@email.com",
+      "id": 13
+    },
+    {
+      "name": "Lady d",
+      "username": "dddd",
+      "email": "lady@email.com",
+      "id": 14
+    },
+    {
+      "name": "Mariama",
+      "username": "mari",
+      "email": "mari@email.com",
+      "id": 15
+    },
+    {
+      "name": "lerele",
+      "username": "lere",
+      "email": "lere@gma.com",
+      "id": 16
     }
   ]
 }
