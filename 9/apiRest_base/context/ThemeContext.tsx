@@ -1,5 +1,6 @@
 import { Colors, darkColors, lightColors } from "@/constants/theme";
-import { createContext, ReactNode, useCallback, useContext, useMemo, useState } from "react";
+import { useStoredState } from "@/hooks/useStoredState";
+import { createContext, ReactNode, useCallback, useContext, useMemo } from "react";
 
 export type Theme = "light" | "dark";
 
@@ -13,7 +14,8 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  // Antes: useState("light"). Ahora el tema se guarda en el celular y se recuerda al reabrir la app.
+  const [theme, setTheme, isReady] = useStoredState<Theme>("@apiRest:theme", "light");
 
   // useCallback (Clase 6): toggleTheme mantiene la misma identidad entre renders.
   const toggleTheme = useCallback(() => {
@@ -26,6 +28,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     () => ({ theme, colors: theme === "light" ? lightColors : darkColors, toggleTheme }),
     [theme, toggleTheme]
   );
+
+  // Mientras se lee el tema guardado no dibujamos nada (dura un instante) para evitar un parpadeo claro -> oscuro.
+  if (!isReady) return null;
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
