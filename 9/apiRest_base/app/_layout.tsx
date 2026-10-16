@@ -18,6 +18,7 @@ function RootLayoutNav() {
       >
         <Stack.Screen name="index" options={{ title: "Usuarios" }} />
         <Stack.Screen name="create-user" options={{ title: "Nuevo usuario" }} />
+        <Stack.Screen name="notes" options={{ title: "Notas en la nube" }} />
       </Stack>
       {/* Fondo oscuro -> íconos claros, y viceversa */}
       <StatusBar style={theme === "dark" ? "light" : "dark"} />
