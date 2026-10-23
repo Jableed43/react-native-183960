@@ -1,7 +1,9 @@
+/* eslint-disable react/display-name */
 import { Note } from "@/constants/notes";
 import { useTheme } from "@/context/ThemeContext";
 import React, { memo } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Animated, { FadeInDown, FadeOutRight } from 'react-native-reanimated'
 
 interface NoteItemProps {
   note: Note;
@@ -14,7 +16,10 @@ export const NoteItem = memo(({ note, onToggle, onDelete }: NoteItemProps) => {
   const { colors } = useTheme();
 
   return (
-    <View style={[styles.item, { backgroundColor: colors.card, borderBottomColor: colors.border }]}>
+    <Animated.View 
+    entering={FadeInDown.springify()}
+    exiting={FadeOutRight}
+    style={[styles.item, { backgroundColor: colors.card, borderBottomColor: colors.border }]}>
       <TouchableOpacity style={styles.content} onPress={() => onToggle(note)}>
         <Text style={styles.check}>{note.done ? "✅" : "⬜"}</Text>
         <View style={styles.texts}>
@@ -33,7 +38,7 @@ export const NoteItem = memo(({ note, onToggle, onDelete }: NoteItemProps) => {
       <TouchableOpacity onPress={() => onDelete(note.id)}>
         <Text style={styles.delete}>🗑️</Text>
       </TouchableOpacity>
-    </View>
+    </Animated.View>
   );
 });
 

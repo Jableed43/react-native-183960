@@ -50,10 +50,6 @@ export default function Index() {
     router.push("/create-user");
   }, [router]);
 
-  const handleGoToNotes = useCallback(() => {
-    router.push("/notes");
-  }, [router]);
-
   if (error) {
     return (
       <View style={[styles.centered, { backgroundColor: colors.background }]}>
@@ -80,12 +76,6 @@ export default function Index() {
           >
             <Text style={styles.themeButtonText}>{theme === "light" ? "🌙" : "☀️"}</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.themeButton, { backgroundColor: colors.card, borderColor: colors.border }]}
-            onPress={handleGoToNotes}
-          >
-            <Text style={styles.themeButtonText}>☁️</Text>
-          </TouchableOpacity>
           <TouchableOpacity style={[styles.addButton, { backgroundColor: colors.primary }]} onPress={handleGoToCreate}>
             <Text style={[styles.addButtonText, { color: colors.onPrimary }]}>+ Nuevo Usuario</Text>
           </TouchableOpacity>
@@ -110,7 +100,7 @@ export default function Index() {
         <FlatList
           data={filteredUsers}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => <UserCard user={item} />}
+          renderItem={({ item, index }) => <UserCard user={item} index={index} />}
           refreshing={loading}
           onRefresh={getUsers}
           ListEmptyComponent={

@@ -5,7 +5,6 @@ import { useStoredState } from "@/hooks/useStoredState";
 import React, { useCallback, useState } from "react";
 import {
   ActivityIndicator,
-  FlatList,
   StyleSheet,
   Text,
   TextInput,
@@ -13,6 +12,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Animated, { LinearTransition } from "react-native-reanimated"
 
 export default function Notes() {
   const { colors } = useTheme();
@@ -91,7 +91,8 @@ export default function Notes() {
           <ActivityIndicator size="large" color={colors.primary} />
         </View>
       ) : (
-        <FlatList
+        <Animated.FlatList
+          itemLayoutAnimation={LinearTransition}
           data={notes}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <NoteItem note={item} onToggle={toggleNote} onDelete={deleteNote} />}

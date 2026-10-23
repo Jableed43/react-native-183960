@@ -1,6 +1,7 @@
 import { ThemeProvider, useTheme } from "@/context/ThemeContext";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 // Este componente existe porque useTheme solo funciona DENTRO del Provider.
 // RootLayout es quien lo monta, así que no puede consumirlo a la vez.
@@ -16,9 +17,8 @@ function RootLayoutNav() {
           contentStyle: { backgroundColor: colors.background },
         }}
       >
-        <Stack.Screen name="index" options={{ title: "Usuarios" }} />
+        <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
         <Stack.Screen name="create-user" options={{ title: "Nuevo usuario" }} />
-        <Stack.Screen name="notes" options={{ title: "Notas en la nube" }} />
       </Stack>
       {/* Fondo oscuro -> íconos claros, y viceversa */}
       <StatusBar style={theme === "dark" ? "light" : "dark"} />
@@ -28,8 +28,10 @@ function RootLayoutNav() {
 
 export default function RootLayout() {
   return (
-    <ThemeProvider>
-      <RootLayoutNav />
-    </ThemeProvider>
+    <GestureHandlerRootView>
+      <ThemeProvider>
+        <RootLayoutNav />
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }
