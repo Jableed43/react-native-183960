@@ -1,7 +1,6 @@
 import { NoteItem } from "@/components/NoteItem";
 import { useTheme } from "@/context/ThemeContext";
 import { useNotes } from "@/hooks/useNotes";
-import { useStoredState } from "@/hooks/useStoredState";
 import React, { useCallback, useState } from "react";
 import {
   ActivityIndicator,
@@ -13,25 +12,30 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Animated, { LinearTransition } from "react-native-reanimated"
+import { useSession } from "@/context/SessionContext";
 
 export default function Notes() {
   const { colors } = useTheme();
   const { notes, loading, error, offline, addNote, toggleNote, deleteNote } = useNotes();
 
   // Guardado LOCAL (AsyncStorage): el nombre queda en el celular y no hay que escribirlo cada vez.
-  const [author, setAuthor] = useStoredState("@apiRest:author", "");
+  // const [author, setAuthor] = useStoredState("@apiRest:author", "");
+
+  // El autor ya no se pregunta: sale de la sesión (la persona que inició sesión en el login).
+  const { user } = useSession();
+
   // Estado normal: el texto de la nota nueva no hace falta guardarlo.
   const [text, setText] = useState("");
 
-  const canAdd = text.trim() !== "" && author.trim() !== "";
+  const canAdd = text.trim() !== "";
 
   const handleAdd = useCallback(() => {
     if (!canAdd) return;
     // Guardado en la NUBE: la nota viaja a Firestore.
     // Limpiamos el campo enseguida (Firestore la guarda y la sincroniza en segundo plano).
-    addNote(text.trim(), author.trim());
+    addNote(text.trim(), user ?? "invitado");
     setText("");
-  }, [canAdd, addNote, text, author]);
+  }, [canAdd, addNote, text, user]);
 
   const inputThemeStyle = {
     backgroundColor: colors.inputBackground,
@@ -42,16 +46,7 @@ export default function Notes() {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={["left", "right"]}>
       <View style={[styles.form, { backgroundColor: colors.surface, borderBottomColor: colors.border }]}>
-        <Text style={[styles.label, { color: colors.textSecondary }]}>Tu nombre (se guarda en tu celular)</Text>
-        <TextInput
-          style={[styles.input, inputThemeStyle]}
-          value={author}
-          onChangeText={setAuthor}
-          placeholder="Ej: Ana"
-          placeholderTextColor={colors.textDisabled}
-        />
-
-        <Text style={[styles.label, { color: colors.textSecondary }]}>Nueva nota (se guarda en la nube)</Text>
+        <Text style={[styles.label, { color: colors.textSecondary }]}>Escribiendo como {user} - la nota se guarda en la nube</Text>
         <View style={styles.row}>
           <TextInput
             style={[styles.input, styles.rowInput, inputThemeStyle]}
