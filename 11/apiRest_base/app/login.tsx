@@ -1,5 +1,5 @@
-import { useSession } from "@/context/SessionContext";
-import { useTheme } from "@/context/ThemeContext";
+import { useSession } from "@/features/session/SessionContext";
+import { useTheme } from "@/features/theme/ThemeContext";
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Animated, {

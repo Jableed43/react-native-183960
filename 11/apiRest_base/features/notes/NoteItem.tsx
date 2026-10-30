@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
-import { Note } from "@/constants/notes";
-import { useTheme } from "@/context/ThemeContext";
+import { Note } from "@/features/notes/notes";
+import { useTheme } from "@/features/theme/ThemeContext";
 import React, { memo } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Animated, { FadeInDown, FadeOutRight } from 'react-native-reanimated'

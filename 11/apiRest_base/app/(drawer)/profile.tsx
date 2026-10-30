@@ -1,6 +1,6 @@
-import { useSession } from "@/context/SessionContext";
-import { useTheme } from "@/context/ThemeContext";
-import { useStoredState } from "@/hooks/useStoredState";
+import { useSession } from "@/features/session/SessionContext";
+import { useTheme } from "@/features/theme/ThemeContext";
+import { useStoredState } from "@/shared/useStoredState";
 import { StyleSheet, Switch, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Animated, { FadeInDown, ZoomIn } from "react-native-reanimated";
 

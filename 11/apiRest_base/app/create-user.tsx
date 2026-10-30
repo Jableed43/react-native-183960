@@ -1,5 +1,5 @@
-import { useTheme } from "@/context/ThemeContext";
-import { usePostUser } from "@/hooks/usePostUser";
+import { useTheme } from "@/features/theme/ThemeContext";
+import { usePostUser } from "@/features/users/usePostUser";
 import { useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import {

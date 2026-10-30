@@ -1,4 +1,4 @@
-import { useTheme } from "@/context/ThemeContext";
+import { useTheme } from "@/features/theme/ThemeContext";
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 

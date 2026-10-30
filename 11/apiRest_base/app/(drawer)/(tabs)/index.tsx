@@ -1,6 +1,6 @@
-import { UserCard } from "@/components/UserCard";
-import { useTheme } from "@/context/ThemeContext";
-import { useGetUsers } from "@/hooks/useGetUsers";
+import { UserCard } from "@/features/users/UserCard";
+import { useTheme } from "@/features/theme/ThemeContext";
+import { useGetUsers } from "@/features/users/useGetUsers";
 import { useFocusEffect, useRouter } from "expo-router";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import {

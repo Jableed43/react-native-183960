@@ -1,5 +1,5 @@
-import { useSession, SessionProvider } from "@/context/SessionContext";
-import { ThemeProvider, useTheme } from "@/context/ThemeContext";
+import { useSession, SessionProvider } from "@/features/session/SessionContext";
+import { ThemeProvider, useTheme } from "@/features/theme/ThemeContext";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";

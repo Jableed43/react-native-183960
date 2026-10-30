@@ -1,6 +1,6 @@
-import { NoteItem } from "@/components/NoteItem";
-import { useTheme } from "@/context/ThemeContext";
-import { useNotes } from "@/hooks/useNotes";
+import { NoteItem } from "@/features/notes/NoteItem";
+import { useTheme } from "@/features/theme/ThemeContext";
+import { useNotes } from "@/features/notes/useNotes";
 import React, { useCallback, useState } from "react";
 import {
   ActivityIndicator,
@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Animated, { LinearTransition } from "react-native-reanimated"
-import { useSession } from "@/context/SessionContext";
+import { useSession } from "@/features/session/SessionContext";
 
 export default function Notes() {
   const { colors } = useTheme();

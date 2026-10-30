@@ -1,4 +1,4 @@
-import { API_URL, CreateUserData } from "@/constants/api";
+import { API_URL, CreateUserData } from "@/features/users/api";
 import { useCallback, useState } from "react";
 
 export function usePostUser() {

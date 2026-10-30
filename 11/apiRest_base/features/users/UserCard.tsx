@@ -1,5 +1,5 @@
-import { User } from "@/constants/api";
-import { useTheme } from "@/context/ThemeContext";
+import { User } from "@/features/users/api";
+import { useTheme } from "@/features/theme/ThemeContext";
 import React, { memo } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated"

@@ -1,5 +1,5 @@
-import { Colors, darkColors, lightColors } from "@/constants/theme";
-import { useStoredState } from "@/hooks/useStoredState";
+import { Colors, darkColors, lightColors } from "@/features/theme/theme";
+import { useStoredState } from "@/shared/useStoredState";
 import { createContext, ReactNode, useCallback, useContext, useMemo } from "react";
 
 export type Theme = "light" | "dark";

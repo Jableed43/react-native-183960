@@ -1,4 +1,4 @@
-import { useStoredState } from "@/hooks/useStoredState";
+import { useStoredState } from "@/shared/useStoredState";
 import { createContext, ReactNode, useCallback, useContext, useMemo } from "react";
 
 interface SessionContextType {

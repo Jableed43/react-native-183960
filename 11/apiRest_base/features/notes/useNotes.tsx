@@ -1,4 +1,4 @@
-import { NOTES_COLLECTION, Note } from "@/constants/notes";
+import { NOTES_COLLECTION, Note } from "@/features/notes/notes";
 import { db } from "@/config/firebase";
 import {
   addDoc,
