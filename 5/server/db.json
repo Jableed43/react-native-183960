@@ -1,14 +1,6 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Leanne Graham",
-      "username": "Bret",
-      "email": "Sincere@april.biz",
-      "phone": "1-770-736-8031 x56442",
-      "website": "hildegard.org"
-    },
-    {
       "id": 2,
       "name": "Ervin Howell",
       "username": "Antonette",
@@ -123,6 +115,72 @@
       "username": "ssssss",
       "email": "dasdas@gmail.com",
       "id": 17
+    },
+    {
+      "name": "nuevo_usuario",
+      "username": "nuevo",
+      "email": "nuevo@email.com",
+      "id": 18
+    },
+    {
+      "name": "Nuevo 2",
+      "username": "apellido nuevo",
+      "email": "nuevo2gmail.com",
+      "id": 19
+    },
+    {
+      "name": "Nuevo 3",
+      "username": "nuevo_3",
+      "email": "user_nuevo3@gmail.com",
+      "id": 20
+    },
+    {
+      "name": "nuevo_user_4",
+      "username": "44",
+      "email": "nuevo_4@gmail.com",
+      "id": 21
+    },
+    {
+      "name": "nuevo_user_4",
+      "username": "nuevo_userrr",
+      "email": "nuevo_4@gmail.com",
+      "id": 22
+    },
+    {
+      "name": "nuevo_user_4",
+      "username": "nuevo_userrr",
+      "email": "nuevo_4@gmail.com",
+      "id": 23
+    },
+    {
+      "name": "nuevo_user_4",
+      "username": "nuevo_userrr",
+      "email": "nuevo_4@gmail.com",
+      "id": 24
+    },
+    {
+      "name": "javier",
+      "username": "javier_2",
+      "email": "jloppppz@gmail.com",
+      "id": 25
+    },
+    {
+      "name": "dasdasd",
+      "username": "dasdasdasd",
+      "email": "asdasdads@gmail.com",
+      "id": 26
+    },
+    {
+      "name": "dasdasd",
+      "username": "dasdasdasd",
+      "email": "asdasdads@gmail.com",
+      "id": 27
+    },
+    {
+      "name": "alan",
+      "username": "Alan El jefe",
+      "email": "alan@gmail.com",
+      "id": 28
     }
   ]
 }

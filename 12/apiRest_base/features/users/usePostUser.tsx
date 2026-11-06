@@ -17,7 +17,7 @@ export function usePostUser() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
       });
-
+      console.log({response})
       if (!response.ok) {
         throw new Error(`Error ${response.status} al crear el usuario`);
       }

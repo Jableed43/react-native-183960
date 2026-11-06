@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "../../12/apiRest_base/features/users/useDeleteUser.tsx", "../../12/apiRest_base/features/users/useUpdateUser.tsx"  ]
 }

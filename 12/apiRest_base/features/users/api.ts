@@ -1,15 +1,8 @@
-import { Platform } from "react-native";
-
 // Tu IP local detectada para que funcione en dispositivos físicos
 // revisar en CMD -> ipconfig -> ipv4
-const IP_LOCAL = "192.168.1.38";
+export const API_BASE_URL = (process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:3000").replace(/\/+$/, "");
 
-const BASE_URL =
-  Platform.OS === "android"
-    ? `http://${IP_LOCAL}:3000`
-    : `http://localhost:3000`;
-
-export const API_URL = `${BASE_URL}/users`;
+export const API_URL = `${API_BASE_URL}/users`;
 
 export interface User {
   id: number;
@@ -29,3 +22,6 @@ export interface CreateUserData {
   phone?: string;
   website?: string;
 }
+
+// Para editar mandamos solo lo que cambió: por eso todos los campos son opcionales.
+export type UpdateUserData = Partial<CreateUserData>;

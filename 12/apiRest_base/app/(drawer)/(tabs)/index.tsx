@@ -1,10 +1,14 @@
 import { UserCard } from "@/features/users/UserCard";
 import { useTheme } from "@/features/theme/ThemeContext";
+import { User } from "@/features/users/api";
+import { useDeleteUser } from "@/features/users/useDeleteUser";
 import { useGetUsers } from "@/features/users/useGetUsers";
+import { confirmAction } from "@/shared/confirmAction";
 import { useFocusEffect, useRouter } from "expo-router";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   Button,
   FlatList,
   StyleSheet,
@@ -19,6 +23,7 @@ export default function Index() {
   const router = useRouter();
   // destructuracion de objetos
   const { error, getUsers, loading, users } = useGetUsers();
+  const { removeUser } = useDeleteUser();
   const [search, setSearch] = useState("");
   // Context API: leemos el tema global sin recibir ninguna prop.
   const { theme, colors, toggleTheme } = useTheme();
@@ -50,10 +55,33 @@ export default function Index() {
     router.push("/create-user");
   }, [router]);
 
+  // useCallback: la tarjeta usa memo, así que estas funciones tienen que mantener su identidad.
+  const handleEdit = useCallback(
+    (user: User) => {
+      router.push({ pathname: "/edit-user", params: { id: String(user.id) } });
+    },
+    [router]
+  );
+
+  const handleDelete = useCallback(
+    (user: User) => {
+      // Borrar no se puede deshacer: primero pedimos confirmación.
+      confirmAction("Eliminar usuario", `¿Seguro que querés eliminar a ${user.name}?`, async () => {
+        const errorMessage = await removeUser(user.id);
+        if (errorMessage) {
+          Alert.alert("No se pudo eliminar", errorMessage);
+          return;
+        }
+        getUsers(); // volvemos a pedir la lista para que ya no aparezca
+      });
+    },
+    [removeUser, getUsers]
+  );
+
   if (error) {
     return (
       <View style={[styles.centered, { backgroundColor: colors.background }]}>
-        <Text style={[styles.errorText, { color: colors.error }]}>No se pudo conectar: {error}</Text>
+        <Text style={[styles.errorText, { color: colors.error }]}>{error}</Text>
         <Button title="Reintentar" onPress={getUsers} />
       </View>
     );
@@ -100,7 +128,9 @@ export default function Index() {
         <FlatList
           data={filteredUsers}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item, index }) => <UserCard user={item} index={index} />}
+          renderItem={({ item, index }) => (
+            <UserCard user={item} index={index} onEdit={handleEdit} onDelete={handleDelete} />
+          )}
           refreshing={loading}
           onRefresh={getUsers}
           ListEmptyComponent={
