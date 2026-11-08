@@ -6,3 +6,10 @@ expo-env.d.ts
 # @end expo-cli
 # claves de Firebase (no subir al repositorio)
 .env
+node_modules/
+.expo/
+dist/
+web-build/
+android/
+ios/
+*.log
