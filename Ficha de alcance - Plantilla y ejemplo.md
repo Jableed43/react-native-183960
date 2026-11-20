@@ -94,3 +94,5 @@ Stack                                       Stack
 - [ ] Tengo escrito **lo que NO hace**.
 - [ ] Es algo que puedo **terminar y probar** antes de la Clase 14.
 - [ ] Tengo un **plan B** si falla una parte (internet, API, Firebase).
+
+![alt text](image-1.png)
