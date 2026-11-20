@@ -95,4 +95,4 @@ Stack                                       Stack
 - [ ] Es algo que puedo **terminar y probar** antes de la Clase 14.
 - [ ] Tengo un **plan B** si falla una parte (internet, API, Firebase).
 
-![alt text](image-1.png)
+![imagen](image.png)
